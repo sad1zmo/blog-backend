@@ -8,7 +8,7 @@
     <title>Sensive Blog - Home</title>
     <link rel="icon" href="{% static "img/favicon.png" %}" type="image/png">
 
-    <link rel="stylesheet" href="./static/styles.min.css">
+    <link rel="stylesheet" href="{% static "styles.min.css" %}">
   </head>
   <body>
     <!--================Header Menu Area =================-->
@@ -68,15 +68,46 @@
                   <div class="col-md-4">
                     <div class="card blog__slide text-center">
                       <div class="blog__slide__img">
-                        <img class="card-img rounded-0" src="{{ post.image_url }}" alt="">
+                        {% if post.image_url %}
+                          <img class="card-img rounded-0" src="{{ post.image_url }}" alt="">
+                        {% else %}
+                          <img class="card-img rounded-0" src="{% static "img/banner/blog.png" %}" alt="">
+                        {% endif %}
                       </div>
                       <div class="blog__slide__content">
                         <h3><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h3>
                         <p>{{ post.published_at|date:"F j, Y" }}</p>
+                        <p>{{ post.text|truncatewords:50 }}</p>
+                        <p>Автор: {{ post.author }}</p>
+                        <p>Комментариев: {{ post.comments_amount }}</p>
                       </div>
                     </div>
                   </div>
                 {% endfor %}
+                <h2>Свежие посты</h2>
+                  <div class="row">
+                    {% for post in fresh_posts %}
+                      <div class="col-md-12">
+                        <div class="card blog__slide text-center">
+                          <div class="blog__slide__img">
+                            {% if post.image_url %}
+                              <img class="card-img rounded-0" src="{{ post.image_url }}" alt="">
+                            {% else %}
+                              <img class="card-img rounded-0" src="{% static "img/banner/blog.png" %}" alt="">
+                            {% endif %}
+                          </div>
+                          <div class="blog__slide__content">
+                            <h3><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h3>
+                            <p>{{ post.published_at|date:"F j, Y" }}</p>
+                            <p>{{ post.text|truncatewords:50 }}</p>
+                            <p>Автор: {{ post.author }}</p>
+                            <p>Комментариев: {{ post.comments_amount }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
                 
             <!-- Start Blog Post Siddebar -->
             <div class="col-lg-4 sidebar-widgets">
