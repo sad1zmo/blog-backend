@@ -1,3 +1,4 @@
+{% extends "base.html" %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="{% static "styles.min.css" %}">
   </head>
   <body>
+    {% block content %}
     <!--================Header Menu Area =================-->
     <header class="header_area">
       <div class="main_menu">
@@ -207,5 +209,6 @@
     <!--================ End Footer Area =================-->
 
     <script src="{% static "scripts.js" %}"></script>
+    {% endblock %}
   </body>
 </html>
