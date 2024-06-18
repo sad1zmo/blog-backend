@@ -98,7 +98,7 @@
                       <div class="details mt-20">
                         <h3><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h3>
                         <p>{{ post.text|truncatewords:200 }}</p>
-                        <a class="button" href="#">Read More <i class="ti-arrow-right"></i></a>
+                        <a class="button" href="{% url 'post_detail' post.slug %}">Read More <i class="ti-arrow-right"></i></a>
                       </div>
                     {% endfor %}
                     </div>
